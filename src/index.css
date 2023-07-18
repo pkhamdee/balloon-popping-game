@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.product-item{
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product-item:hover{
+  background: rgb(2,85,168);
+  color: white;
+}
+
+.product-item img{
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.item img{
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.red-text {
+  color: red;
+}
+.green-text {
+  color: green;
+}

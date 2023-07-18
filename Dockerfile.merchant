@@ -1,0 +1,7 @@
+FROM node:latest
+RUN npm install -g json-server
+WORKDIR /data
+COPY ./src/db/merchant.json /data/merchant.json
+EXPOSE 3000
+ENTRYPOINT ["json-server"]
+CMD ["--watch", "merchant.json", "--host", "0.0.0.0"]

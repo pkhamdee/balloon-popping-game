@@ -1,0 +1,7 @@
+FROM node:latest
+RUN npm install -g json-server
+WORKDIR /data
+COPY ./src/db/players.json /data/players.json
+EXPOSE 3000
+ENTRYPOINT ["json-server"]
+CMD ["--watch", "players.json", "--host", "0.0.0.0"]
