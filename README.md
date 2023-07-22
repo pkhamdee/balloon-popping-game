@@ -12,3 +12,8 @@ http://localhost:3000
 http://localhost:3000/player
 ##merchandise
 http://localhost:3000/merchant
+
+
+#build-container
+docker buildx build --platform linux/amd64,linux/arm64 -t pkhamdee/price-game:1.0 .
+docker buildx build --load -t pkhamdee/price-game:1.0  .

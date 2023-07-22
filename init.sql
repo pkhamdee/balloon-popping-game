@@ -1,0 +1,2 @@
+CREATE TABLE "player" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "price" integer NOT NULL, CONSTRAINT "PK_65edadc946a7faf4b638d5e8885" PRIMARY KEY ("id"));
+CREATE TABLE "merchant" ("id" SERIAL NOT NULL, "product" character varying NOT NULL, "image" character varying NOT NULL, "price" integer NOT NULL, "status" boolean NOT NULL, "hint" character varying NOT NULL, CONSTRAINT "PK_9a3850e0537d869734fc9bff5d6" PRIMARY KEY ("id"));

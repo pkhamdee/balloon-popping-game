@@ -1,27 +1,25 @@
-# Fetching the latest node image on apline linux
 FROM node:alpine AS builder
-
-# Declaring env
 ENV NODE_ENV production
-
-# Setting up the work directory
 WORKDIR /app
-
-# Installing dependencies
 COPY ./package.json ./
 RUN npm install
-
-# Copying all the files in our project
+# Copy app files
 COPY . .
-
-# Building our application
+# Build the app
 RUN npm run build
 
-# Fetching the latest nginx image
-FROM nginx
+# Bundle static assets with nginx
+FROM nginx:alpine as production
+RUN apk add --update nodejs npm 
 
-# Copying built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Copying our nginx.conf
+# Copy built assets from builder
+COPY --from=builder /app/ /app/
+# Add your nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN rm -rf /usr/share/nginx/html/*
+
+ENTRYPOINT npx react-inject-env set \
+&& cp -R /app/build/* /usr/share/nginx/html \
+&& cp -R /build/* /usr/share/nginx/html \
+&& 'nginx' '-g' 'daemon off;'

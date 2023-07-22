@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import MainLayout from '../layouts/MainLayout';
+import { env } from '../env'
 
 function Merchant() {
 
@@ -15,18 +16,23 @@ function Merchant() {
   const [isOpen, setIsOpen] = useState(false);
   const [temp, setTemp] = useState(0);
 
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  //const [updateState] = React.useState();
+  //const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const fetchPlayers = async () => {
-    const result = await axios.get(process.env.REACT_APP_DATASOURCE_PLAYERS_LINK);
+    const result = await axios.get(env.REACT_APP_DATASOURCE_PLAYERS_LINK);
     setPlayers(await result.data);
   }
 
   const fetchMerchant = async () => {
-    const result = await axios.get(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK);
-    setMerchant(await result.data);
-    setIsOpen(merchant.status);
+    const result = await axios.get(env.REACT_APP_DATASOURCE_MERCHANT_LINK);
+    if(result.data.length !== 0 ){
+      setMerchant(result.data[result.data.length-1]);
+      setIsOpen(merchant.status);
+    } else {
+      console.log('Merchant is empty');
+      setMerchant([]);
+    }
   }
 
   useEffect(() => {
@@ -72,7 +78,7 @@ function Merchant() {
   }
   const setMerchantPrice = (e) => {
     setMerchant({
-      ...merchant, price: e.target.value
+      ...merchant, price: Number(e.target.value)
     });
   }
   const setMerchantHint = (e) => {
@@ -82,7 +88,7 @@ function Merchant() {
   }
 
   const removePlayer = (player) => {
-    axios.delete(`${process.env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${player.id}`)
+    axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${player.id}`)
       .then(function (response) {
         console.log(response);
         toast(`Deleted ${player.id}`, toastOptions);
@@ -98,7 +104,7 @@ function Merchant() {
   const updateMerchant = async (event) => {
     event.preventDefault();
 
-    axios.put(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK, {
+    axios.patch(`${env.REACT_APP_DATASOURCE_MERCHANT_LINK}/${merchant.id}`, {
       product: merchant.product,
       image: merchant.image,
       price: merchant.price,
@@ -119,23 +125,20 @@ function Merchant() {
   const startGame = async (event) => {
     event.preventDefault();
 
-    axios.put(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK, {
+    axios.patch(`${env.REACT_APP_DATASOURCE_MERCHANT_LINK}/${merchant.id}`, {
       status: true,
       product: merchant.product,
       image: merchant.image,
       price: merchant.price,
       hint: merchant.hint
-    })
-      .then(function (response) {
-        setIsOpen(true);
-        toast(`Game started`, toastOptions);
-      })
-      .catch(function (error) {
-        toast(`Oops! Please try again.`, toastOptions);
-      });
+    }).then(function (response) {
+      setIsOpen(true);
+      toast(`Game started`, toastOptions);
+    }).catch(function (error) {
+      toast(`Oops! Please try again.`, toastOptions);
+    });
 
-     fetchMerchant();
-     forceUpdate();
+    fetchMerchant();
   }
 
 
@@ -143,20 +146,19 @@ function Merchant() {
     event.preventDefault();
 
     //update merchant status
-    axios.put(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK, {
+    axios.patch(`${env.REACT_APP_DATASOURCE_MERCHANT_LINK}/${merchant.id}`, {
       status: false,
       product: merchant.product,
       image: merchant.image,
       price: merchant.price,
       hint: merchant.hint
-    })
-      .then(function (response) {
-        setIsOpen(false);
-        toast(`Merchandise status updated!`, toastOptions);
-      })
-      .catch(function (error) {
-        toast(`Oops! Please try again.`, toastOptions);
-      });
+    }).then(function (response) {
+      setIsOpen(false);
+      toast(`Merchandise status updated!`, toastOptions);
+    }).catch(function (error) {
+      toast(`Oops! Please try again.`, toastOptions);
+    });
+
     fetchMerchant();
 
     if (players && players.length > 0) {
@@ -168,7 +170,7 @@ function Merchant() {
 
       const filterPlayer = players.filter(player => player.price !== closest.price);
       filterPlayer.map((filter) => {
-        axios.delete(`${process.env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
+        axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
           .then(function (response) {
             console.log(response);
           })
@@ -186,7 +188,7 @@ function Merchant() {
       toast(`No player found`, toastOptions);
     }
 
-    forceUpdate();
+    //forceUpdate();
   }
 
   return (

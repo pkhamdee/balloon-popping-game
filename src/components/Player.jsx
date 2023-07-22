@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import MainLayout from '../layouts/MainLayout';
+import { env } from '../env'
 
 function Player() {
 
@@ -17,18 +18,23 @@ function Player() {
   //reload
   const [temp, setTemp] = useState(0);
 
-  //input field
   const [price, setPrice] = useState(0);
   const [playerName, setPlayerName] = useState("");
 
   const fetchPlayers = async () => {
-    const result = await axios.get(process.env.REACT_APP_DATASOURCE_PLAYERS_LINK);
+    const result = await axios.get(env.REACT_APP_DATASOURCE_PLAYERS_LINK);
     setPlayers(await result.data);
   }
 
   const fetchMerchant = async () => {
-    const result = await axios.get(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK);
-    setMerchant(await result.data);
+    const result = await axios.get(env.REACT_APP_DATASOURCE_MERCHANT_LINK);
+    //if many, get last record
+    if (result.data.length !== 0) {
+      setMerchant(result.data[result.data.length - 1]);
+    } else {
+      console.log('Merchant is empty');
+      setMerchant([]);
+    }
   }
 
   useEffect(() => {
@@ -48,59 +54,46 @@ function Player() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(playerName.trim() !== ""){
+    if (playerName.trim() !== "") {
 
-      if(playerId > 0) {
-        //update
-        axios.put(`${process.env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${playerId}`, {
-          id: playerId, 
-          name: playerName, 
-          price: price
-      }
-      )
-        .then(function (response) {
-          console.log(response);
+      //used to add before, it is update case
+      if (playerId > 0) {
+
+        axios.patch(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${playerId}`, {
+          name: playerName,
+          price: Number(price)
+        }).then(function (response) {
           toast(`Updated ${playerName}`, toastOptions);
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
           console.log(error);
           toast(`Oops! Please try again or refresh browser`, toastOptions);
         });
-  
-  
+
       } else {
         //add
-  
-        //find name in players
-        //check if the adding product exist
+        //find name in players and check if the adding name is exist
         let findNameInPlayers = await players.find(i => {
           return i.name.toLowerCase() === playerName.toLowerCase()
         });
-  
-        if(!findNameInPlayers) {
-          fetchPlayers();
-          let newPlayerId = 1;
-          if (players.length > 0) {
-            newPlayerId = Math.max.apply(null, players.map(function (o) { return o.id; })) + 1;
-          } 
 
-          axios.post(process.env.REACT_APP_DATASOURCE_PLAYERS_LINK, {
-            id: newPlayerId,
+        if (!findNameInPlayers) {
+          //add new player
+          axios.post(env.REACT_APP_DATASOURCE_PLAYERS_LINK, {
             name: playerName,
-            price: price
+            price: Number(price)
           }).then(function (response) {
-            setPlayerId(newPlayerId);
+            setPlayerId(response.data.id);
             toast(`Added ${playerName} to Game`, toastOptions);
-          })
-          .catch(function (error) {
+          }).catch(function (error) {
             console.log(error);
             toast(`Oops! Please try again.`, toastOptions);
           });
+
         } else {
           toast(`Oops! Name already in use.`, toastOptions);
         }
       }
-  
+
       fetchPlayers();
     } else {
       toast(`Oops! Names can't be empty`, toastOptions);
@@ -124,7 +117,7 @@ function Player() {
               <input type="text" onChange={(e) => setPlayerName(e.target.value)} value={playerName} /> <br></br>
               How much do things really cost?
               <input style={{ width: '80px' }} type="number" onChange={(e) => setPrice(e.target.value.replace(/\+|-/ig, ''))} value={price} /> <br></br><br></br>
-              <button className='btn btn-primary btn-sm' type="submit" > Send </button>
+              <button className='btn btn-primary btn-sm' type="submit" disabled={!merchant.status}> Send </button>
             </form>
           </div>
         </div>

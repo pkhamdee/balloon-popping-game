@@ -3,8 +3,9 @@ import { StyledBalloon } from './Balloon.styles';
 import { random, randomColor } from './utils';
 import mojs from "@mojs/core";
 import axios from 'axios';
-import qrcode from './demo_qrcode.png';
+import qrcode from './qrcode.png';
 import soundbible from './soundbible.mp3'
+import { env } from './env'
 
 
 function Balloon() {
@@ -17,15 +18,23 @@ function Balloon() {
 
     const fetchPlayers = async () => {
         setIsLoading(true);
-        const result = await axios.get(process.env.REACT_APP_DATASOURCE_PLAYERS_LINK);
+        const result = await axios.get(env.REACT_APP_DATASOURCE_PLAYERS_LINK);
         setPlayers(await result.data);
         setIsLoading(false);
     }
 
     const fetchMerchant = async () => {
         setIsLoading(true);
-        const result = await axios.get(process.env.REACT_APP_DATASOURCE_MERCHANT_LINK);
-        setMerchant(await result.data);
+        const result = await axios.get(env.REACT_APP_DATASOURCE_MERCHANT_LINK);
+        //setMerchant(await result.data);
+
+        if (result.data.length !== 0) {
+            setMerchant(result.data[result.data.length - 1]);
+        } else {
+            console.log('Merchant is empty');
+            setMerchant([]);
+        }
+
         setIsLoading(false);
     }
 
@@ -74,7 +83,7 @@ function Balloon() {
 
     useEffect(() => {
         setInterval(() => {
-            setTemp((prevTemp) => prevTemp+1)
+            setTemp((prevTemp) => prevTemp + 1)
         }, 15000)
     }, []);
 
@@ -128,18 +137,18 @@ function Balloon() {
             <div style={textContainerStyle}>
                 <h1 style={textStyle}> The Price is Right </h1>
                 <h1 style={priceTextStyle}>{merchant.status ? "" : `The Price is $ ${merchant.price}`}</h1>
-                    <br></br>
-                    <div className='product-item px-3 text-center'>
-                         <img src={merchant.image} className="img-fluid" alt={merchant.product} />
-                    </div>
+                <br></br>
+                <div className='product-item px-3 text-center'>
+                    <img src={merchant.image} className="img-fluid" alt={merchant.product} />
+                </div>
 
-                    <div class= "text-center">
-                     <br></br>
+                <div class="text-center">
+                    <br></br>
                     <h1 style={subTextStyle}> Scan to play..</h1>
-                    <img src={qrcode} height="160"/>
-                    </div>
-   
-                
+                    <img src={qrcode} height="160" />
+                </div>
+
+
             </div>
 
             <div id='portal-balloons'>
