@@ -2,19 +2,21 @@ version: '3.3'
 
 services:
   price-game:
-    image: pkhamdee/price-game:1.0
+    image: pkhamdee/price-game:1.1
     container_name: price-game
     ports:
       - "80:80"
     restart: always
+    links:
+     - shop-data
     environment:
      - REACT_APP_DATASOURCE_PLAYERS_LINK=http://localhost:3030/players
      - REACT_APP_DATASOURCE_MERCHANT_LINK=http://localhost:3030/merchant
   shop-data:
     container_name: shop-data
-    image: pkhamdee/shop-api:1.1
+    image: pkhamdee/shop-api:1.2
     env_file:
-      - .env.shop-data
+      - env.shop-data
     ports:
       - "3030:3000"
     restart: always    
