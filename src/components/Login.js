@@ -25,8 +25,8 @@ const Login = () => {
     }
 
     const merchantUser = {
-        'user': "vbc",
-        'password': "VMware1!"
+        'user': "xxx",
+        'password': "xxx"
     }
 
     useEffect(() => {
