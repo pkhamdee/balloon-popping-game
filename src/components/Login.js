@@ -25,8 +25,8 @@ const Login = () => {
     }
 
     const merchantUser = {
-        'user': "xxx",
-        'password': "xxx"
+        'user': "xx",
+        'password': "xx"
     }
 
     useEffect(() => {

@@ -74,6 +74,12 @@ function Balloon() {
         fontSize: '1.5em',
         textTransform: 'uppercase'
     };
+    const smallTextStyle = {
+        color: '#ffffff',
+        fontFamily: 'sans-serif',
+        fontSize: '1.0em',
+        textTransform: 'uppercase'
+    };
 
     useEffect(() => {
         setInterval(() => {
@@ -141,11 +147,15 @@ function Balloon() {
                 <div class="text-center" style={{ height: "auto", margin: "0 auto", maxWidth: 200, width: "100%" }}>
                     <QRCode
                         size={256}
+                        fgColor="#FFFFFF"
+                        bgColor="#000000"
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}
                         value={from}
                         viewBox={`0 0 256 256`}
                     />
                 </div>
+                <br></br>
+                <h1 style={smallTextStyle}>{from}</h1>
             </div>
 
             <div id='portal-balloons'>
