@@ -3,39 +3,33 @@ import { StyledBalloon } from './Balloon.styles';
 import { random, randomColor } from './utils';
 import mojs from "@mojs/core";
 import axios from 'axios';
-import qrcode from './qrcode.png';
 import soundbible from './soundbible.mp3'
 import { env } from './env'
-
+import QRCode from "react-qr-code";
 
 function Balloon() {
 
     const [players, setPlayers] = useState([]);
     const [merchant, setMerchant] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+
+    const from = window.location.href+"player";
 
     const [temp, setTemp] = useState(0);
 
     const fetchPlayers = async () => {
-        setIsLoading(true);
         const result = await axios.get(env.REACT_APP_DATASOURCE_PLAYERS_LINK);
         setPlayers(await result.data);
-        setIsLoading(false);
     }
 
     const fetchMerchant = async () => {
-        setIsLoading(true);
         const result = await axios.get(env.REACT_APP_DATASOURCE_MERCHANT_LINK);
-        //setMerchant(await result.data);
 
-        if (result.data.length !== 0) {
+        if (await result.data.length !== 0) {
             setMerchant(result.data[result.data.length - 1]);
         } else {
             console.log('Merchant is empty');
             setMerchant([]);
         }
-
-        setIsLoading(false);
     }
 
     const colors = ['yellow', 'green', 'blue', 'red', 'orange', 'purple'];
@@ -141,14 +135,17 @@ function Balloon() {
                 <div className='product-item px-3 text-center'>
                     <img src={merchant.image} className="img-fluid" alt={merchant.product} />
                 </div>
-
-                <div class="text-center">
-                    <br></br>
-                    <h1 style={subTextStyle}> Scan to play..</h1>
-                    <img src={qrcode} height="160" />
+                <br></br>
+                <br></br>
+                <h1 style={subTextStyle}> Scan to play..</h1>
+                <div class="text-center" style={{ height: "auto", margin: "0 auto", maxWidth: 200, width: "100%" }}>
+                    <QRCode
+                        size={256}
+                        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                        value={from}
+                        viewBox={`0 0 256 256`}
+                    />
                 </div>
-
-
             </div>
 
             <div id='portal-balloons'>
