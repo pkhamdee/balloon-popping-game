@@ -65,20 +65,20 @@ function Balloon() {
         color: '#ffffff',
         fontFamily: 'sans-serif',
         fontSize: '1.5em',
-        textTransform: 'uppercase'
+        //textTransform: 'uppercase'
     };
 
     const priceTextStyle = {
         color: 'yellow',
         fontFamily: 'sans-serif',
         fontSize: '1.5em',
-        textTransform: 'uppercase'
+        //textTransform: 'uppercase'
     };
     const smallTextStyle = {
         color: '#ffffff',
         fontFamily: 'sans-serif',
         fontSize: '1.0em',
-        textTransform: 'uppercase'
+        //textTransform: 'uppercase'
     };
 
     useEffect(() => {
@@ -135,7 +135,7 @@ function Balloon() {
         <div style={containerStyle}>
 
             <div style={textContainerStyle}>
-                <h1 style={textStyle}> The Price is Right </h1>
+                <h1 style={textStyle}> Your Price is Right </h1>
                 <h1 style={priceTextStyle}>{merchant.status ? "" : `The Price is $ ${merchant.price}`}</h1>
                 <br></br>
                 <div className='product-item px-3 text-center'>
@@ -143,7 +143,7 @@ function Balloon() {
                 </div>
                 <br></br>
                 <br></br>
-                <h1 style={subTextStyle}> Scan to play..</h1>
+                <h1 style={subTextStyle}> Scan to play...</h1>
                 <div class="text-center" style={{ height: "auto", margin: "0 auto", maxWidth: 200, width: "100%" }}>
                     <QRCode
                         size={256}
