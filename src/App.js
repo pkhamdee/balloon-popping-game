@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import Balloon from './Balloon';
 import Player from './components/Player';
 import Merchant from "./components/Merchant";

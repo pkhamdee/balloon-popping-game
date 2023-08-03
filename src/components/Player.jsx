@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import MainLayout from '../layouts/MainLayout';
-import { env } from '../env'
+import { env } from '../env';
 
 function Player() {
 
