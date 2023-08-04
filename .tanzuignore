@@ -1,0 +1,15 @@
+### Git ###
+.git/
+
+### Node ###
+node_modules/
+build/
+
+### VS Code ###
+.vscode/
+
+### Tilt ###
+Tiltfile
+
+### Accelerator ###
+accelerator-log.md
