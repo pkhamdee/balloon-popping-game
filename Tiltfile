@@ -31,4 +31,4 @@ k8s_custom_deploy(
 k8s_resource('price-game', port_forwards=["8081:8080"],
             extra_pod_selectors=[{'carto.run/workload-name': 'price-game', 'app.kubernetes.io/component': 'run'}])
 
-allow_k8s_contexts('tanzu-play-caa-wlc-tap-full-az-15-admin@tanzu-play-caa-wlc-tap-full-az-15')
+allow_k8s_contexts('tap-iterate')

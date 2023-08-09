@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: price-game-config
-  namespace: sg-vbc
+  namespace: price-game
 data:
-  react.app.datasource.merchant.link: https://shop-data.sg-vbc.full.tanzu-play-caa.net/merchant
-  react.app.datasource.players.link: https://shop-data.sg-vbc.full.tanzu-play-caa.net/players
+  react.app.datasource.merchant.link: https://shop-data-price-game.tap-run-stg.tanzu-play-caa.net/merchant
+  react.app.datasource.players.link: https://shop-data-price-game.tap-run-stg.tanzu-play-caa.net/players

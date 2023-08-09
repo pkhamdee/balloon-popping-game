@@ -31,9 +31,7 @@ spec:
       value:
         autoscaling.knative.dev/minScale: "1"
     - name: clusterBuilder
-      value: full
-    # - name: dockerfile
-    #   value: ./Dockerfile
+      value: full-jammy
   build:
     env:
       - name: BP_NODE_RUN_SCRIPTS

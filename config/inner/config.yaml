@@ -4,5 +4,5 @@ metadata:
   name: price-game-config
   namespace: dev-live
 data:
-  react.app.datasource.merchant.link: https://shop-data.dev-live.full.tanzu-play-caa.net/merchant
-  react.app.datasource.players.link: https://shop-data.dev-live.full.tanzu-play-caa.net/players
+  react.app.datasource.merchant.link: https://shop-data-dev-live.tap-iterate.tanzu-play-caa.net/merchant
+  react.app.datasource.players.link: https://shop-data-dev-live.tap-iterate.tanzu-play-caa.net/players

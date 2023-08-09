@@ -1,5 +1,6 @@
 {
     "tanzu.namespace": "dev-live",
     "tanzu.sourceImage": "tanzuplaycaa.azurecr.io/dev-live/price-game-source",
-    "tanzu.selectedNamespaces": "dev-live"
+    "tanzu.selectedNamespaces": "dev-live",
+    "tanzu.trackedNamespaces": "dev-live"
 }
