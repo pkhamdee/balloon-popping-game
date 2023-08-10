@@ -22,9 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-<<<<<<< HEAD
-.env
-=======
 # TAP resources
 config/
->>>>>>> 2e86dce0adb6ddcba3ebd373a335b8881f94a144
