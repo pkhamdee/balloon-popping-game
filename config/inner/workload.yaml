@@ -1,0 +1,43 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: price-game
+  namespace: dev-live
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/part-of: price-game
+spec:
+  env:
+  - name: REACT_APP_DATASOURCE_PLAYERS_LINK
+    valueFrom:
+      configMapKeyRef:
+        name: price-game-config
+        key: react.app.datasource.players.link
+  - name: REACT_APP_DATASOURCE_MERCHANT_LINK
+    valueFrom:
+      configMapKeyRef:
+        name: price-game-config
+        key: react.app.datasource.merchant.link
+  - name: REACT_APP_APP_NAME
+    value: price-game        
+  - name: REACT_APP_APP_SERVICE_NAME
+    value: frontend
+  - name: REACT_APP_OTEL_ENABLE
+    value: "false"
+  - name: REACT_APP_OTEL_COLLECTOR_URL
+    value: "http://localhost:4318/v1/traces"
+  params:
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
+    - name: clusterBuilder
+      value: full-jammy
+  build:
+    env:
+      - name: BP_NODE_RUN_SCRIPTS
+        value: "build"
+  source:
+    git:
+      url: https://github.com/pkhamdee/balloon-popping-game
+      ref:
+        branch: main
