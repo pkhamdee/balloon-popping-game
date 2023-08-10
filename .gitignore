@@ -24,4 +24,3 @@ yarn-error.log*
 
 # TAP resources
 config/
-.env
