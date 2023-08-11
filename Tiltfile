@@ -9,18 +9,17 @@ local_resource(
     deps=['./src'],
 )
 
-k8s_yaml('config/inner/config.yaml')
+k8s_yaml('config/config.yaml')
 
 k8s_custom_deploy(
     'price-game',
-    apply_cmd="tanzu apps workload apply -f config/inner/workload.yaml --update-strategy replace --debug --live-update" +
+    apply_cmd="tanzu apps workload apply -f config/workload.yaml --update-strategy replace --debug --live-update" +
                " --local-path " + LOCAL_PATH +
-               " --source-image " + SOURCE_IMAGE +
                " --namespace " + NAMESPACE +
                " --yes " +
                OUTPUT_TO_NULL_COMMAND +
                " && kubectl get workload price-game --namespace " + NAMESPACE + " -o yaml",
-    delete_cmd="tanzu apps workload delete -f config/inner/workload.yaml --namespace " + NAMESPACE + " --yes",
+    delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
     deps=['./build'],
     container_selector='workload',
     live_update=[
