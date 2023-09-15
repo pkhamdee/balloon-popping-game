@@ -135,7 +135,7 @@ function Balloon() {
         <div style={containerStyle}>
 
             <div style={textContainerStyle}>
-                <h1 style={textStyle}> Your Price is Right! </h1>
+                <h1 style={textStyle}> Your Price is Right </h1>
                 <h1 style={priceTextStyle}>{merchant.status ? "" : `The Price is $ ${merchant.price}`}</h1>
                 <br></br>
                 <div className='product-item px-3 text-center'>
