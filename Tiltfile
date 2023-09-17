@@ -25,11 +25,10 @@ k8s_custom_deploy(
               "> NUL" +
               " && kubectl get workload price-game --namespace " + "dev-live" + " -o yaml",              
     delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
-    deps=['./dist', 'Procfile', 'env.sh'],
+    deps=['./build'],
     container_selector='workload',
     live_update=[
-      sync('./dist', '/workspace/dist'), 
-      run('echo `date` > /workspace/reload') # force an update in /workspace folder as this is the folder that watchexec is monitoring
+      sync('./build', '/workspace/build')
     ]
 )
 
