@@ -1,1 +1,1 @@
-web: ./env.sh && nginx -p /workspace -c /workspace/nginx.conf -g 'pid /tmp/nginx.pid;'
+web: chmod u+x ./env.sh && ./env.sh && nginx -p /workspace -c /workspace/nginx.conf -g 'pid /tmp/nginx.pid;'

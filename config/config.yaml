@@ -1,4 +1,16 @@
 apiVersion: v1
+kind: Secret
+metadata:
+  name: npmrc
+  namespace: dev-live
+type: service.binding/npmrc
+stringData:
+  type: npmrc
+  provider: npmrc
+  .npmrc: |
+    registry=https://registry.npmjs.com
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: price-game-config
@@ -8,5 +20,5 @@ data:
   app.service.name: backend
   otel.collector.url: http://localhost:4318/v1/traces
   otel.enable: "false"
-  datasource.merchant.link: https://shop-data-dev-live.tap-iterate.tanzu-play-caa.net/merchant
-  datasource.players.link: https://shop-data-dev-live.tap-iterate.tanzu-play-caa.net/players
+  datasource.merchant.link: https://shop-data-dev-live.tap-iterate.tanzu-sgvbc.net/merchant
+  datasource.players.link: https://shop-data-dev-live.tap-iterate.tanzu-sgvbc.net/players

@@ -1,9 +1,9 @@
 ### Git ###
-.git/
+.git
 
 ### Node ###
-node_modules/
-build/
+node_modules
+build
 
 ### VS Code ###
 .vscode/

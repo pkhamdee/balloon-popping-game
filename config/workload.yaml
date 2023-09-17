@@ -44,6 +44,10 @@ spec:
         autoscaling.knative.dev/minScale: "1"
     - name: clusterBuilder
       value: full-jammy
+    - name: buildServiceBindings
+      value:
+      - kind: Secret
+        name: npmrc
   build:
     env:
       - name: BP_NODE_RUN_SCRIPTS
