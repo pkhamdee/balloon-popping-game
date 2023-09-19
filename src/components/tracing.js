@@ -50,7 +50,7 @@ export const frontendTracer = () => {
           propagateTraceHeaderCorsUrls: /.*/,
           clearTimingResources: true,
           applyCustomAttributesOnSpan(span) {
-            span.setAttribute('http.status_text','OK');
+            // span.setAttribute('http.status_text','OK');
             span.setAttribute('app.synthetic_request', 'false');
           },
         },
