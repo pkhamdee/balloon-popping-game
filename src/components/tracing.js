@@ -18,7 +18,6 @@ export const frontendTracer = () => {
 
   const exporter = new OTLPTraceExporter({
     url: env.REACT_APP_OTEL_COLLECTOR_URL, // use public ip of ubuntu vm and specify proxy port
-    headers: {}
   });
 
   const provider = new WebTracerProvider({
@@ -27,6 +26,7 @@ export const frontendTracer = () => {
       application: env.REACT_APP_APP_NAME
     }),
   });
+  
   provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
 
   const contextManager = new ZoneContextManager();
@@ -50,7 +50,7 @@ export const frontendTracer = () => {
           propagateTraceHeaderCorsUrls: /.*/,
           clearTimingResources: true,
           applyCustomAttributesOnSpan(span) {
-            span.setAttribute('app.synthetic_request', 'false');
+            span.setAttribute('app.synthetic_request', 'true');
           },
         },
         // load custom configuration for fetch instrumentation
@@ -58,12 +58,14 @@ export const frontendTracer = () => {
           propagateTraceHeaderCorsUrls: /.*/,
           clearTimingResources: true,
           applyCustomAttributesOnSpan(span) {
-            span.setAttribute('app.synthetic_request', 'false');
+            span.setAttribute('app.synthetic_request', 'true');
           },
         },
       }),
     ],
   });
+
+
 
 }
 
