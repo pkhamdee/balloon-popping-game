@@ -9,7 +9,7 @@ function MainPage() {
 
     const scrollVertical = {
         width: '350px',
-        height: '500px',
+        height: '680px',
         overflowX: 'scroll',
         overflowY: 'scroll'
     };
@@ -62,7 +62,7 @@ function MainPage() {
         backgroundImage: `url(${background})`,
         backgroundSize: 'cover',
         width: "100vw",
-        height: "100vh",
+        //height: "100vw",
     };
 
     const [players, setPlayers] = useState([]);
@@ -114,6 +114,7 @@ function MainPage() {
                     <img src={expo} height="15" />
                     </div>
                     <div class="col-8">
+                        <br></br>
                     <h1 style={textStyle}> Your Price is Right </h1>
                     </div>
                 </div>
