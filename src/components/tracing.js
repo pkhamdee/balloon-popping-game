@@ -51,7 +51,6 @@ export const frontendTracer = () => {
           clearTimingResources: true,
           applyCustomAttributesOnSpan(span) {
             span.setAttribute('app.synthetic_request', 'true');
-            span.setAttribute('http.status_text', 'OK');
           },
         },
         // load custom configuration for fetch instrumentation
