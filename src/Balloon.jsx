@@ -5,7 +5,7 @@ import mojs from "@mojs/core";
 import axios from 'axios';
 import soundbible from './soundbible.mp3'
 import { env } from './env'
-import QRCode from "react-qr-code";
+import { QRCodeCanvas } from "qrcode.react";
 
 function Balloon() {
 
@@ -145,14 +145,15 @@ function Balloon() {
                 <br></br>
                 <h1 style={subTextStyle}> Scan to play...</h1>
                 <div class="text-center" style={{ height: "auto", margin: "0 auto", maxWidth: 256, width: "100%" }}>
-                    <QRCode
-                        size={230}
-                        fgColor="#FFFFFF"
-                        bgColor="#000000"
-                        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                        value={from}
-                        viewBox={`0 0 256 256`}
-                    />  
+
+                            <QRCodeCanvas
+                                id="Your price is right" 
+                                size={256}
+                                bgColor="#ffffff"
+                                level={"H"}
+                                value={from}
+                                includeMargin='true'
+                            />
 
                 </div>
                 <br></br>

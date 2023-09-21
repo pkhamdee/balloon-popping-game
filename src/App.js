@@ -5,6 +5,7 @@ import Merchant from "./components/Merchant";
 import Missing from "./components/Missing";
 import Unauthorized from './components/Unauthrized';
 import RequireAuth from './components/RequireAuth';
+import MainPage from './components/MainPage';
 import Login from "./components/Login";
 
 import {
@@ -27,7 +28,8 @@ export default function App() {
       <AuthProvider>
       <Routes>
         {/* public routes */}
-        <Route path="/" element={<Balloon />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/v1" element={<Balloon />} />
         <Route path="/player" element={<Player />} />
         <Route path="unauthorized" element={<Unauthorized />} />
         <Route path="login" element={<Login />} />

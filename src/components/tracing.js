@@ -65,15 +65,4 @@ export const frontendTracer = () => {
     ],
   });
 
-
-
 }
-
-//export default frontendTracer;
-// export default function FrontendTracer({ children }) {
-//   return (
-//     <>
-//       {children}
-//     </>
-//   );
-// }

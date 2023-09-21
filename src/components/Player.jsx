@@ -6,6 +6,13 @@ import { env } from '../env';
 
 function Player() {
 
+  const scrollVertical = {
+    width: '350px',
+    height: '500px',
+    overflowX: 'scroll',
+    overflowY: 'scroll'
+};
+
   const toastOptions = {
     autoClose: 400,
     pauseOnHover: true,
@@ -104,14 +111,14 @@ function Player() {
   return (
     <MainLayout>
       <div className='row'>
-        <div className='col-lg-6 mb-4'>
-          <div className='px-3 text-left'>
-            <h2 className='px-2 text-black'>Player</h2>
+        <div className='col-lg-5 mb-4'>
+          <div className='px-3 text-left text-black'>
+            <h2 className='px-2 text-white'>Player</h2>
             <div className='item px-3 text-lelf'>
               <img src={merchant.image} className="img-fluid" alt={merchant.product} />
             </div>
             <b>Product</b> {merchant ? merchant.product : ""} <br></br>
-            <b><span className="red-text">Hint</span></b> {merchant ? merchant.hint : ""} <br></br><br></br>
+            <b><span className="yellow-text">Hint</span></b> {merchant ? merchant.hint : ""} <br></br><br></br>
             <form onSubmit={handleSubmit}>
               What's is your name ?
               <input type="text" onChange={(e) => setPlayerName(e.target.value)} value={playerName} /> <br></br>
@@ -123,8 +130,8 @@ function Player() {
         </div>
 
         <div className='col-lg-4 mb-4 text-left'>
-          <h2 className='px-2 text-back'>Charts Overview</h2>
-          <div className='table-responsive bg-white'>
+          <h2 className='px-2 text-white'>Charts Overview</h2>
+          <div className='table-responsive bg-white' style={scrollVertical}>
             <table className='table table-responsive table-white table-hover'>
               <thead>
                 <tr>
@@ -140,7 +147,6 @@ function Player() {
                   <td>{player.price}</td>
                 </tr>)
                   : 'No player'}
-
               </tbody>
             </table>
           </div>

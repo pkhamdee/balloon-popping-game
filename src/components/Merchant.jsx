@@ -6,6 +6,26 @@ import { env } from '../env'
 
 function Merchant() {
 
+  const scrollVertical = {
+    width: '350px',
+    height: '600px',
+    overflowX: 'scroll',
+    overflowY: 'scroll'
+};
+
+  const centerAlign = {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  };
+
+  const containerStyle = {
+    ...centerAlign,
+    backgroundColor: '#fff',
+    height: '100vh',
+  };
+
   const toastOptions = {
     autoClose: 400,
     pauseOnHover: true,
@@ -52,19 +72,6 @@ function Merchant() {
   useEffect(() => {
     fetchMerchant();
   }, []);
-
-  const centerAlign = {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
-  };
-
-  const containerStyle = {
-    ...centerAlign,
-    backgroundColor: '#fff',
-    height: '100vh',
-  };
 
   const setMerchantProduct = (e) => {
     setMerchant({
@@ -141,7 +148,6 @@ function Merchant() {
     fetchMerchant();
   }
 
-
   const endGame = async (event) => {
     event.preventDefault();
 
@@ -195,9 +201,9 @@ function Merchant() {
     <MainLayout>
 
       <div className='row'>
-        <div className='col-lg-6 mb-4'>
-          <div className='px-3 text-left'>
-            <h2 className='px-2 text-black'>Merchandise</h2>
+        <div className='col-lg-5 mb-4'>
+          <div className='px-3 text-left text-black'>
+            <h2 className='px-2 text-white'>Merchandise</h2>
             <div className='item px-3 text-lelf'>
               <img src={merchant.image} className="img-fluid" alt={merchant.product} />
             </div>
@@ -206,7 +212,7 @@ function Merchant() {
               Image URL <input type="text" value={merchant ? merchant.image : ""} size="30" onChange={setMerchantImage} /> <br></br>
               Price <input type="text" value={merchant ? merchant.price : ""} onChange={setMerchantPrice} /> <br></br>
               <span className="red-text">Hint</span> <input type="text" value={merchant ? merchant.hint : ""} size="30" onChange={setMerchantHint} /> <br></br>
-              Game status : {isOpen ? <span className="green-text">Started</span> : <span className="red-text">Ended</span>}
+              Game status : {isOpen ? <span className="green-text bg-warning">Started</span> : <span className="red-text bg-warning">Ended</span>}
               <br></br><br></br>
               <button className='btn btn-primary btn-sm' type="submit"> Update </button>
               &nbsp; &nbsp; &nbsp;
@@ -220,7 +226,7 @@ function Merchant() {
 
         <div className='col-lg-4 mb-4 text-left'>
           <h2 className='px-2 text-back'>Player</h2>
-          <div className='table-responsive bg-white'>
+          <div className='table-responsive bg-white' style={scrollVertical}>
             <table className='table table-responsive table-white table-hover'>
               <thead>
                 <tr>
