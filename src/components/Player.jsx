@@ -14,7 +14,7 @@ function Player() {
 };
 
   const toastOptions = {
-    autoClose: 400,
+    autoClose: 450,
     pauseOnHover: true,
   }
 
@@ -70,7 +70,7 @@ function Player() {
           name: playerName,
           price: Number(price)
         }).then(function (response) {
-          toast(`Updated ${playerName}`, toastOptions);
+          toast(`${playerName}, Thank you for submitting your price ${price}`, toastOptions);
         }).catch(function (error) {
           console.log(error);
           toast(`Oops! Please try again or refresh browser`, toastOptions);
@@ -90,7 +90,7 @@ function Player() {
             price: Number(price)
           }).then(function (response) {
             setPlayerId(response.data.id);
-            toast(`Added ${playerName} to Game`, toastOptions);
+            toast(`${playerName}, Thank you for submitting your price ${price}`, toastOptions);
           }).catch(function (error) {
             console.log(error);
             toast(`Oops! Please try again.`, toastOptions);
