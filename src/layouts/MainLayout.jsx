@@ -10,7 +10,7 @@ function MainLayout({ children }) {
         backgroundImage: `url(${background})`,
         backgroundSize: 'cover', 
         width: "100vw",
-        height: "100vh",
+        //height: "100vh",
       };
 
     return (
