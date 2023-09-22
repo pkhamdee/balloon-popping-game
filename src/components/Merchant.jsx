@@ -27,7 +27,7 @@ function Merchant() {
   };
 
   const toastOptions = {
-    autoClose: 400,
+    autoClose: 1000,
     pauseOnHover: true,
   }
 
@@ -145,6 +145,19 @@ function Merchant() {
       toast(`Oops! Please try again.`, toastOptions);
     });
 
+
+    players.map((filter) => {
+      axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          toast(`Oops! Please try again.`, toastOptions);
+        });
+    }
+    );
+
     fetchMerchant();
   }
 
@@ -170,12 +183,30 @@ function Merchant() {
     if (players && players.length > 0) {
 
       //filter winner
-      const closest = players.reduce(function (prev, curr) {
-        return (Math.abs(curr.price - merchant.price) < Math.abs(prev.price - merchant.price) ? curr : prev);
+      const closest1 = players.reduce(function (prev, curr) {
+        return (Math.abs(curr.price - merchant.price) <= Math.abs(prev.price - merchant.price) ? curr : prev);
       });
 
-      const filterPlayer = players.filter(player => player.price !== closest.price);
-      filterPlayer.map((filter) => {
+      const filterPlayer = players.filter(player => player.price !== closest1.price);
+      const closest2 = filterPlayer.reduce(function (prev, curr) {
+        return (Math.abs(curr.price - merchant.price) <= Math.abs(prev.price - merchant.price) ? curr : prev);
+      });
+
+      var loseGame = [];
+
+      if(Math.abs(closest1.price - merchant.price) < Math.abs(closest2.price - merchant.price)) {
+        //keep closest1
+         loseGame = players.filter(player => player.price !== closest1.price);
+      } else if(Math.abs(closest1.price - merchant.price) === Math.abs(closest2.price - merchant.price)) {
+        //keep both
+         loseGame = players.filter(player => player.price !== closest1.price && player.price !== closest2.price );
+      } else {
+        //keep closest2
+        console.log("keep closest2");
+         loseGame = players.filter(player => player.price !== closest2.price);
+      } 
+
+      loseGame.map((filter) => {
         axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
           .then(function (response) {
             console.log(response);
@@ -187,8 +218,8 @@ function Merchant() {
       }
       );
 
-      fetchPlayers();
-      toast(`Found Winner`, toastOptions);
+     fetchPlayers();
+     toast(`Found Winner`, toastOptions);
 
     } else {
       toast(`No player found`, toastOptions);
@@ -238,7 +269,7 @@ function Merchant() {
               </thead>
               <tbody>
                 {players ? players.map((player, key) => <tr key={key} >
-                  <td>{player.id}</td>
+                  <td>{key+1}</td>
                   <td>{player.name}</td>
                   <td>{player.price}</td>
                   <td>

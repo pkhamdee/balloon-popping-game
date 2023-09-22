@@ -159,7 +159,7 @@ function MainPage() {
                                 </thead>
                                 <tbody>
                                     {players ? players.map((player, key) => <tr key={key} >
-                                        <td>{player.id}</td>
+                                        <td>{key+1}</td>
                                         <td>{player.name}</td>
                                         <td>{player.price}</td>
                                     </tr>)
