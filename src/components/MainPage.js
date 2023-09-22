@@ -4,6 +4,7 @@ import { env } from '../env'
 import { QRCodeCanvas } from "qrcode.react";
 import background from '../bgimage.png'
 import expo from '../expo.png'
+import Confetti from 'react-confetti'
 
 function MainPage() {
 
@@ -106,16 +107,25 @@ function MainPage() {
 
     return (
 
+
         <div style={divBackgroundStyle}>
+
+            <>{!merchant.status ? <Confetti
+                size={5}
+                shape="circle"
+                wind={0}
+                gravity={0.01}
+                numberOfPieces={200}
+            /> : null}</>
 
             <div class="container">
                 <div class="row">
                     <div class="col">
-                    <img src={expo} height="15" />
+                        <img src={expo} height="15" />
                     </div>
                     <div class="col-8">
                         <br></br>
-                    <h1 style={textStyle}> Your Price is Right </h1>
+                        <h1 style={textStyle}> Your Price is Right </h1>
                     </div>
                 </div>
             </div>
@@ -139,6 +149,7 @@ function MainPage() {
                                 size={256}
                                 bgColor="#ffffff"
                                 level={"H"}
+
                                 value={playerUrl}
                                 includeMargin='true'
                             />
@@ -159,7 +170,7 @@ function MainPage() {
                                 </thead>
                                 <tbody>
                                     {players ? players.map((player, key) => <tr key={key} >
-                                        <td>{key+1}</td>
+                                        <td>{key + 1}</td>
                                         <td>{player.name}</td>
                                         <td>{player.price}</td>
                                     </tr>)

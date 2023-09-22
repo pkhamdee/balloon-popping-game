@@ -202,7 +202,6 @@ function Merchant() {
          loseGame = players.filter(player => player.price !== closest1.price && player.price !== closest2.price );
       } else {
         //keep closest2
-        console.log("keep closest2");
          loseGame = players.filter(player => player.price !== closest2.price);
       } 
 
@@ -230,7 +229,6 @@ function Merchant() {
 
   return (
     <MainLayout>
-
       <div className='row'>
         <div className='col-lg-5 mb-4'>
           <div className='px-3 text-left text-black'>
@@ -254,7 +252,6 @@ function Merchant() {
           </div>
           <br></br>
         </div>
-
         <div className='col-lg-4 mb-4 text-left'>
           <h2 className='px-2 text-back'>Player</h2>
           <div className='table-responsive bg-white' style={scrollVertical}>
@@ -277,15 +274,12 @@ function Merchant() {
                   </td>
                 </tr>)
                   : 'No player'}
-
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
     </MainLayout>
-
   )
 }
 
