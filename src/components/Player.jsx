@@ -67,7 +67,7 @@ function Player() {
       if (playerId > 0) {
 
         axios.patch(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${playerId}`, {
-          name: playerName,
+          name: playerName.trim(),
           price: Number(price)
         }).then(function (response) {
           toast(`${playerName}, Thank you for submitting your price ${price}`, toastOptions);
@@ -86,7 +86,7 @@ function Player() {
         if (!findNameInPlayers) {
           //add new player
           axios.post(env.REACT_APP_DATASOURCE_PLAYERS_LINK, {
-            name: playerName,
+            name: playerName.trim(),
             price: Number(price)
           }).then(function (response) {
             setPlayerId(response.data.id);
@@ -112,7 +112,7 @@ function Player() {
     <MainLayout>
       <div className='row'>
         <div className='col-lg-5 mb-4'>
-          <div className='px-3 text-left text-black'>
+          <div className='px-3 text-left text-white'>
             <h2 className='px-2 text-white'>Player</h2>
             <div className='item px-3 text-lelf'>
               <img src={merchant.image} className="img-fluid" alt={merchant.product} />
