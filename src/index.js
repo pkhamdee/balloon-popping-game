@@ -6,8 +6,8 @@ import { frontendTracer } from './components/tracing'
 import { env } from './env'
 
  if (env.REACT_APP_OTEL_ENABLE === "true") {
-   frontendTracer();
- }
+frontendTracer();
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

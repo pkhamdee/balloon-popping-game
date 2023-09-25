@@ -18,6 +18,11 @@ export const frontendTracer = () => {
 
   const exporter = new OTLPTraceExporter({
     url: env.REACT_APP_OTEL_COLLECTOR_URL, // use public ip of ubuntu vm and specify proxy port
+    headers: {
+      "Content-Type": "application/json", 
+      'Access-Control-Allow-Headers': '*',
+      'X-CSRF': '1',
+    }
   });
 
   const provider = new WebTracerProvider({

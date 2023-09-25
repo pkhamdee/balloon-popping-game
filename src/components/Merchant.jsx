@@ -116,7 +116,7 @@ function Merchant() {
       image: merchant.image,
       price: merchant.price,
       hint: merchant.hint,
-      status: merchant.status
+      status: true,
     })
       .then(function (response) {
         console.log(response);
