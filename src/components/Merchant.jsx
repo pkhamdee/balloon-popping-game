@@ -98,7 +98,7 @@ function Merchant() {
     axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${player.id}`)
       .then(function (response) {
         console.log(response);
-        toast(`Deleted ${player.id}`, toastOptions);
+        toast(`Deleted ${player.name}`, toastOptions);
       })
       .catch(function (error) {
         console.log(error);
@@ -173,7 +173,7 @@ function Merchant() {
       hint: merchant.hint
     }).then(function (response) {
       setIsOpen(false);
-      toast(`Merchandise status updated!`, toastOptions);
+      toast(`Merchandise status is updated!`, toastOptions);
     }).catch(function (error) {
       toast(`Oops! Please try again.`, toastOptions);
     });
