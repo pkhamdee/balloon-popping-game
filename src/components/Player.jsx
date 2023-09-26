@@ -58,6 +58,16 @@ function Player() {
     fetchMerchant();
   }, [temp]);
 
+
+  //auto redirect page (player expiration is 10 minute)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // 👇️ redirects to an external URL
+      window.location.replace('https://www.vmware.com/explore/sg.html');
+    }, 900000);
+  }, []);
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from "react-router-dom";
 import background from '../bgimage.png'
+import expo from '../expo.png'
 
 function MainLayout({ children }) {
 
@@ -17,7 +17,7 @@ function MainLayout({ children }) {
         <div style={divBackgroundStyle}>
             <header>
             <div className="flexGrow">
-                <Link to="/">Home Screen</Link>
+                <img src={expo} height="15" alt='explore'/>
             </div>
             </header>
             <main>
