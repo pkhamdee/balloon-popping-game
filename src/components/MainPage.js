@@ -10,7 +10,7 @@ function MainPage() {
 
     const scrollVertical = {
         width: '350px',
-        height: '680px',
+        height: '580px',
         overflowX: 'scroll',
         overflowY: 'scroll'
     };
@@ -125,7 +125,7 @@ function MainPage() {
                     </div>
                     <div class="col-8">
                         <br></br>
-                        <h1 style={textStyle}> Your Price is Right </h1>
+                        <h1 style={textStyle}> Siwoo's Price is Right </h1>
                     </div>
                 </div>
             </div>
