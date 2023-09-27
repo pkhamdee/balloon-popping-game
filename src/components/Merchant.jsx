@@ -149,7 +149,7 @@ function Merchant() {
 
 
     players.map((filter) => {
-      sleep(500);
+      sleep(100);
       axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
         .then(function (response) {
           console.log(response);
@@ -212,7 +212,7 @@ function Merchant() {
 
       loseGame.map((filter) => {
         
-        sleep(500);
+        sleep(100);
 
         axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
           .then(function (response) {
