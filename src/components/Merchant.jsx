@@ -94,6 +94,8 @@ function Merchant() {
     });
   }
 
+  const sleep = ms => new Promise(r => setTimeout(r,ms));
+
   const removePlayer = (player) => {
     axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${player.id}`)
       .then(function (response) {
@@ -147,6 +149,7 @@ function Merchant() {
 
 
     players.map((filter) => {
+      sleep(500);
       axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
         .then(function (response) {
           console.log(response);
@@ -160,6 +163,8 @@ function Merchant() {
 
     fetchMerchant();
   }
+
+  
 
   const endGame = async (event) => {
     event.preventDefault();
@@ -206,6 +211,9 @@ function Merchant() {
       } 
 
       loseGame.map((filter) => {
+        
+        sleep(500);
+
         axios.delete(`${env.REACT_APP_DATASOURCE_PLAYERS_LINK}/${filter.id}`)
           .then(function (response) {
             console.log(response);
@@ -214,6 +222,7 @@ function Merchant() {
             console.log(error);
             toast(`Oops! Please try again.`, toastOptions);
           });
+
       }
       );
 
