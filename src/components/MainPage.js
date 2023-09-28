@@ -125,7 +125,7 @@ function MainPage() {
                     </div>
                     <div class="col-8">
                         <br></br>
-                        <h1 style={textStyle}> Senthil's Price is Right </h1>
+                        <h1 style={textStyle}> Sanil's Price is Right </h1>
                     </div>
                 </div>
             </div>
